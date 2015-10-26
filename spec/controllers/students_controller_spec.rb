@@ -2,9 +2,10 @@ require 'rails_helper'
 RSpec.describe StudentsController, type: :controller do
   describe "GET index" do
     # it "assigns @students" do
-    #   student = Student.create(name: 'aaa', surname: 'bbbb', group_id: 'bbbb')
+    #   student = Student.create(name: 'aaa', surname: 'bbbb')
     #   get :index
-    #   expect(assigns(:students)).to eq([student])
+    #   #expect(assigns(:students)).to eq([student])
+    #   assigns(:students).should == [student]
     # end
 
     it "renders the index template" do

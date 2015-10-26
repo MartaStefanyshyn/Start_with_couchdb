@@ -4,9 +4,11 @@ class GroupsController < ApplicationController
   
   def index
     @groups = Group.all
+    @students = Student.all
   end
 
   def show
+    student = Student.get(group_id: @group.id )
   end
 
   

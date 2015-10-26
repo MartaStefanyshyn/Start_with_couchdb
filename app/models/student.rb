@@ -5,8 +5,9 @@ class Student < CouchRest::Model::Base
   property :name,      String
   property :surname,      String
 
-  design do 
 
+  design do 
+    view :by_id
   	view :by_name,
   	  :map => "function(doc){
   	      if (doc['type'] == 'Student' && doc.name) {
@@ -17,6 +18,17 @@ class Student < CouchRest::Model::Base
         "function(keys, values, rereduce) {
           return sum(values);
         }"
+    view :by_group_id,
+  	  :map => "function(doc){
+  	      if (doc['type'] == 'Student' && doc.group_id) {
+              emit(doc.group_id, 1);
+          }
+        }",
+       :reduce =>
+        "function(keys, values, rereduce) {
+          return sum(values);
+        }"    
+
   end
 
 end

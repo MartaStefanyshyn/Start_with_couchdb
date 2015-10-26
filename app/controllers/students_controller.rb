@@ -4,6 +4,9 @@ class StudentsController < ApplicationController
   def index
     @students = Student.all
     @groups = Group.all
+    @students.each do |student|
+      group = Group.find(_id: student.group_id)
+    end
   end
 
   
