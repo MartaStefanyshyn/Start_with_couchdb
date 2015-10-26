@@ -5,6 +5,15 @@
   <%= @group.title %>
 </p>
 
+<% students.each do |student| %>
+     
+        <p><%= student.name %></p>
+        <p><%= student.surname %></p>
+        <p><%= student.group.title %></p>
+      
+      
+    <% end %>
+
 
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %>

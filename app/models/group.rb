@@ -4,4 +4,5 @@ class Group < CouchRest::Model::Base
 	design do
 		view :by_title
 	end
+
 end

@@ -8,7 +8,7 @@ class GroupsController < ApplicationController
   end
 
   def show
-    student = Student.get(group_id: @group.id )
+    sudents = Student.by_group_id(:startkey => [@group.id], :endkey => [@group.id,{}])
   end
 
   

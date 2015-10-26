@@ -41,6 +41,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'simplecov', '~> 0.9'
   gem 'rspec'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'database_cleaner'
 end
 
 group :development do
