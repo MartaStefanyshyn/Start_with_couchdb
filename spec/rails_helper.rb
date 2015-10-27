@@ -6,6 +6,20 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'factory_girl'
+require 'shoulda/matchers'
+require 'capybara/rspec'
+require 'simplecov'
+SimpleCov.start do
+  add_filter '/spec/'
+  add_filter '/config/'
+  add_filter '/lib/'
+  add_filter '/vendor/'
+
+  add_group 'Controllers', 'app/controllers'
+  add_group 'Models', 'app/models'
+  add_group 'Views', 'app/views/students'
+  add_group 'Views', 'app/views/groups'
+end
 
 #require 'database_cleaner'
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -34,6 +48,7 @@ RSpec.configure do |config|
   config.before(:each) do 
     CouchRest::Model::Base.database.recreate! rescue nil
   end
+  config.include Capybara::DSL
   
 
   # config.before(:each) do

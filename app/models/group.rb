@@ -9,4 +9,6 @@ class Group < CouchRest::Model::Base
       students = Student.by_group_id(:startkey => [self.id], :endkey => [self.id,{}]).all
     end
 
+    validates_presence_of :title
+
 end

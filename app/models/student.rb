@@ -18,7 +18,7 @@ class Student < CouchRest::Model::Base
     view :by_group_id,
   	  :map => "function(doc){
   	      if (doc['type'] == 'Student' && doc['group_id']) {
-              emit([doc.group_id, 1, doc.name], doc);
+              emit([doc.group_id, 1, doc.name], doc.name);
           }
         }"
 

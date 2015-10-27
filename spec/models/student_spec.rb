@@ -14,11 +14,12 @@ describe Student, :type => :model  do
   end
 
   # it "is invalid without a surname" do
-  #   student = create(:student)
-  #   expect(student.by_name_and_surname.all).to_not be_nil
+  #   student = FactoryGirl.create(:student)
+  #   expect(student).to belong_to(:group)
   # end
 
-  # it "studentlist is empty" do
-  #   expect(Student.count).to eq 0
-  # end
+  it "studentlist is empty" do
+    expect(Student.count).to eq 0
+  end
+
 end
