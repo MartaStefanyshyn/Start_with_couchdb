@@ -14,29 +14,14 @@ class Student < CouchRest::Model::Base
   	      if (doc['type'] == 'Student' && doc.name) {
               emit(doc.name, 1);
           }
-        }",
-       :reduce =>
-        "function(keys, values, rereduce) {
-          return sum(values);
         }"
     view :by_group_id,
   	  :map => "function(doc){
-  	      if (doc['type'] == 'Student' && doc.group_id) {
-              emit([doc.group_id], null);
+  	      if (doc['type'] == 'Student' && doc['group_id']) {
+              emit([doc.group_id, 1, doc.name], doc);
           }
-        }" 
-    #     view :by_group_id, :map => "
-    # function(d) {
-    #   t = d['type'];
-    #   if ((t == 'Student' || t == 'Group') && d['group_id']) {
-    #     emit(d.name, 1);
-    #   }
-    # }",  
-    # :reduce =>
-    #     "function(keys, values, rereduce) {
-    #       return sum(values);
-    #     }"  
+        }"
 
   end
-  validates_presence_of :name, message: "can not be blank"
+  validates_presence_of :name, :surname, :group_id
 end

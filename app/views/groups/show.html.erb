@@ -5,11 +5,12 @@
   <%= @group.title %>
 </p>
 
-<% students.each do |student| %>
+<% @group_students.each do |student| %>
      
-        <p><%= student.name %></p>
-        <p><%= student.surname %></p>
-        <p><%= student.group.title %></p>
+        <p>
+        <%= student.name %> 
+        <%= student.surname %>
+        </p>
       
       
     <% end %>
