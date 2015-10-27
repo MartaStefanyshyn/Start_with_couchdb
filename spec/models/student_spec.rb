@@ -13,12 +13,29 @@ describe Student, :type => :model  do
     expect(FactoryGirl.build(:student, surname: nil)).to_not be_valid
   end
 
-  # it "is invalid without a surname" do
-  #   student = create(:student)
-  #   expect(student.by_name_and_surname.all).to_not be_nil
-  # end
+  it "is invalid without a surname" do
+    student = FactoryGirl.create(:student)
+    student2 = FactoryGirl.create(:student)
+    expect(Student.by_name.count).to eq(2)
+  end
 
-  # it "studentlist is empty" do
-  #   expect(Student.count).to eq 0
-  # end
+  it "is invalid without a surname" do
+    student = FactoryGirl.create(:student)
+    expect(Student.by_name.first).to eq(student)
+  end
+
+  it "is invalid without a surname" do
+    student = FactoryGirl.create(:student)
+    expect(Student.by_name_and_surname.first).to eq(student)
+  end
+
+  it "is invalid without a surname" do
+    student = FactoryGirl.create(:student)
+    expect(Student.by_group_id.first).to eq(student)
+  end
+
+  it "studentlist is empty" do
+    expect(Student.count).to eq 0
+  end
+
 end
