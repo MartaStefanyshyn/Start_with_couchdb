@@ -31,10 +31,10 @@ require 'factory_girl'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
-  # config.before(:suite) do
-  #   DatabaseCleaner.strategy = :transaction
-  #   DatabaseCleaner.clean_with(:truncation)
-  # end
+  config.before(:each) do 
+    CouchRest::Model::Base.database.recreate! rescue nil
+  end
+  
 
   # config.before(:each) do
   #   DatabaseCleaner.start

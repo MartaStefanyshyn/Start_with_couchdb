@@ -23,5 +23,5 @@ class Student < CouchRest::Model::Base
         }"
 
   end
-  validates_presence_of :name, :surname, :group_id
+  validates_presence_of :name, :surname
 end
