@@ -13,23 +13,23 @@ describe Student, :type => :model  do
     expect(FactoryGirl.build(:student, surname: nil)).to_not be_valid
   end
 
-  it "is invalid without a surname" do
+  it "should map with by_name" do
     student = FactoryGirl.create(:student)
     student2 = FactoryGirl.create(:student)
     expect(Student.by_name.count).to eq(2)
   end
 
-  it "is invalid without a surname" do
+  it "map with by_name" do
     student = FactoryGirl.create(:student)
     expect(Student.by_name.first).to eq(student)
   end
 
-  it "is invalid without a surname" do
+  it "map with by_name_and_surname" do
     student = FactoryGirl.create(:student)
     expect(Student.by_name_and_surname.first).to eq(student)
   end
 
-  it "is invalid without a surname" do
+  it "map with by_group_id" do
     student = FactoryGirl.create(:student)
     expect(Student.by_group_id.first).to eq(student)
   end
