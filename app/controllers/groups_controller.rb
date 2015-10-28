@@ -3,8 +3,7 @@ class GroupsController < ApplicationController
 
   
   def index
-    @groups = Group.all
-    @students = Student.all
+    @groups = Group.search(params[:search])
   end
 
   def show
