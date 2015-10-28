@@ -1,6 +1,11 @@
 require 'rails_helper'
 RSpec.describe GroupsController, type: :controller do
   describe "GET index" do
+    it "assigns @group" do
+      group = create(:group)
+      get :index
+      expect(assigns(:groups)).to match_array([group])
+    end
     it "renders the index template" do
       get :index
       expect(response).to render_template("index")

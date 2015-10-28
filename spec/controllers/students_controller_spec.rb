@@ -1,7 +1,11 @@
 require 'rails_helper'
 RSpec.describe StudentsController, type: :controller do
   describe "GET index" do
-
+    it "assigns @students" do
+      student = Student.create(name: 'aaa', surname: 'bbbb')
+      get :index
+      expect(assigns(:students)).to match_array([student])
+    end
     it "renders the index template" do
       get :index
       expect(response).to render_template("index")
