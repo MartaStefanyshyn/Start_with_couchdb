@@ -30,8 +30,7 @@ class Student < CouchRest::Model::Base
 
   def self.search(search)
     if search && search != ''
-      group = Group.by_title(key: search).first
-      by_group_id(key: group.id).all
+      by_name(key: search).all
     else
       all
     end
