@@ -7,6 +7,7 @@ require 'action_mailer/railtie'
 require 'active_resource/railtie'
 require 'active_model/railtie'
 require 'rails/test_unit/railtie'
+require 'wicked_pdf'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -27,5 +28,7 @@ module RailsCouchdb
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     #config.active_record.raise_in_transactional_callbacks = true
+    config.active_job.queue_adapter = :resque
+    config.middleware.use WickedPdf::Middleware, {}
   end
 end
