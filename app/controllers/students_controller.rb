@@ -2,7 +2,7 @@ class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
 
   def index
-    PdfJob.perform_later()
+    #PdfJob.perform_later()
     @groups = Group.all
     @students = Student.search(params[:search])
   end
