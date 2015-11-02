@@ -18,14 +18,15 @@ class Group < CouchRest::Model::Base
       students = Student.by_group_id(key: self.id).all.count
     end
 
+
     validates_presence_of :title
 
     def self.search(search)
      if search && search != ''
-      by_title(key: search)
-    else
+       by_title(key: search)
+     else
       all
+     end
     end
-  end
 
 end
