@@ -47,6 +47,7 @@ group :development, :test do
   gem 'shoulda-matchers', require: false
   gem 'capybara'
   gem 'simplecov', :require => false
+  gem 'rspec-activejob'
 end
 
 group :development do

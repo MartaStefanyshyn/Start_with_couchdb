@@ -36,6 +36,12 @@ describe Student, :type => :model  do
     expect(group.group_students).to eq([student])
   end
 
+  it "group_students_count" do
+    group = FactoryGirl.create(:group)
+    student = FactoryGirl.create(:student, group_id: group.id)
+    expect(group.group_students_count).to eq(1)
+  end
+
   it "searches right group_by_title" do
     group = FactoryGirl.create(:group, title: 'test_title')
     group2 = FactoryGirl.create(:group, title: 'test_title2')

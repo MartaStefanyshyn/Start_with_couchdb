@@ -4,6 +4,10 @@ class PdfSaver < CouchRest::Model::Base
     
     design do 
       view :by_title
-  end
+    end
+
+    timestamps!
+
+    validates_presence_of :title
 end
 

@@ -9,6 +9,7 @@ require 'factory_girl'
 require 'shoulda/matchers'
 require 'capybara/rspec'
 require 'simplecov'
+require 'rspec/active_job'
 SimpleCov.start do
   add_filter '/spec/'
   add_filter '/config/'
@@ -19,6 +20,7 @@ SimpleCov.start do
   add_group 'Models', 'app/models'
   add_group 'Views', 'app/views/students'
   add_group 'Views', 'app/views/groups'
+  add_group 'Jobs', 'app/jobs'
 end
 
 #require 'database_cleaner'
@@ -44,7 +46,12 @@ end
 #ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  config.include(RSpec::ActiveJob)
   config.include FactoryGirl::Syntax::Methods
+  config.after(:each) do
+    ActiveJob::Base.queue_adapter.enqueued_jobs = []
+    ActiveJob::Base.queue_adapter.performed_jobs = []
+  end
   config.before(:each) do 
     CouchRest::Model::Base.database.recreate! rescue nil
   end

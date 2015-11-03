@@ -86,4 +86,14 @@ RSpec.describe GroupsController, type: :controller do
       }.to change(Group, :count).by(-1)
     end
   end 
+
+  describe 'pdf_generator' do
+    it "redirect to index" do
+      get :pdf_generator
+      html = "<p>Hello</p>"
+      PdfJob.perform_later(html)
+      expect(response).to redirect_to(:action => :index)
+    end
+  end 
+
 end

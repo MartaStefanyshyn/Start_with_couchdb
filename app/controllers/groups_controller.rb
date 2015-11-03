@@ -57,7 +57,6 @@ class GroupsController < ApplicationController
 
 
   def pdf_generator
-    @groups = Group.all
     html = render_to_string(:action => :index, :template => "groups/index.html")
     PdfJob.perform_later(html)
     flash[:notice] = "pdf was generated"

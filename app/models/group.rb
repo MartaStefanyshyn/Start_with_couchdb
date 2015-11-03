@@ -17,7 +17,7 @@ class Group < CouchRest::Model::Base
     def group_students_count
       students = Student.by_group_id(key: self.id).all.count
     end
-
+    
 
     validates_presence_of :title
 
