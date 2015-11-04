@@ -1,21 +1,18 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
 
-  
   def index
     @groups = Group.search(params[:search])
   end
 
   def show
-    @group_students = @group.group_students()
+    @group_students = @group.group_students
   end
 
-  
   def new
     @group = Group.new
   end
 
-  
   def edit
   end
 
@@ -33,7 +30,6 @@ class GroupsController < ApplicationController
     end
   end
 
- 
   def update
     respond_to do |format|
       if @group.update_attributes(group_params)
@@ -46,7 +42,6 @@ class GroupsController < ApplicationController
     end
   end
 
-  
   def destroy
     @group.destroy
     respond_to do |format|
@@ -55,22 +50,21 @@ class GroupsController < ApplicationController
     end
   end
 
-
   def pdf_generator
-    html = render_to_string(:action => :index, :template => "groups/index.html")
+    @groups = Group.all
+    html = render_to_string(action: :index, template: 'groups/index.html')
     PdfJob.perform_later(html)
-    flash[:notice] = "pdf was generated"
+    flash[:notice] = 'pdf was generated'
     redirect_to groups_path
   end
 
   private
-    
-    def set_group
-      @group = Group.find(params[:id])
-    end
 
-    
-    def group_params
-      params.require(:group).permit(:title)
-    end
+  def set_group
+    @group = Group.find(params[:id])
+  end
+
+  def group_params
+    params.require(:group).permit(:title)
+  end
 end

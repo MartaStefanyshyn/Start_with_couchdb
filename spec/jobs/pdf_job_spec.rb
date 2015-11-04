@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe PdfJob, type: :job do
   include ActiveJob::TestHelper
 
-  subject(:job) { described_class.perform_later("<p>Hello</p>") }
+  subject(:job) { described_class.perform_later('<p>Hello</p>') }
 
   it 'queues the job' do
     expect { job }

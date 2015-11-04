@@ -1,31 +1,39 @@
 require 'couchrest_model'
 class Student < CouchRest::Model::Base
-
-  
   belongs_to :group
-  property :name,      String
-  property :surname,      String
+  property :name, String
+  property :surname, String
 
-
-  design do 
+  design do
     view :by_name_and_surname,
-    :map => "function(doc){
-          if ((doc['type'] == 'Student') && (doc.name != null) && (doc.surname != null)) {
-              emit([doc.name, doc.surname], doc);
-          }
-        }"
-  	view :by_name,
-  	  :map => "function(doc){
-  	      if (doc['type'] == 'Student' && doc.name != null) {
-              emit(doc.name, 1);
-          }
-        }"
+         map: "function(doc){
+               if ((doc['type'] == 'Student') && (doc.name != null) && (doc.surname != null))
+               {
+                   emit([doc.name, doc.surname], doc);
+               }
+             }"
+    view :by_name,
+         map: "function(doc){
+               if (doc['type'] == 'Student' && doc.name != null)
+               {
+                   emit(doc.name, 1);
+               }
+             }"
     view :by_group_id,
-  	  :map => "function(doc){
-  	      if (doc['type'] == 'Student' && doc['group_id'] != null) {
-              emit(doc.group_id, doc);
-          }
-        }"
+         map: "function(doc){
+               if (doc['type'] == 'Student' && doc['group_id'] != null) {
+                   emit(doc.group_id, doc);
+               }
+             }"
+    view :by_group,
+         map: "function(doc){
+               if (doc['type'] == 'Student' && doc['group_id'] != null) {
+                   emit(doc.group_id, 1);
+               }
+             }",
+         reduce: "function(k,v,r){
+               return sum(v);
+           }"
   end
 
   def self.search(search)

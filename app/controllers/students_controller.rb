@@ -2,32 +2,26 @@ class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
 
   def index
-    #html = "<strong>Hello!</strong>"
-    #PdfJob.perform_later(html)
     @groups = Group.all
     @students = Student.search(params[:search])
   end
 
-  
   def show
     group = Group.find(_id: @student.group_id)
   end
 
-  
   def new
     @student = Student.new
     @groups = Group.all
   end
 
-  
   def edit
     @groups = Group.all
   end
 
- 
   def create
     @student = Student.new(student_params)
-    
+
     respond_to do |format|
       if @student.save
         format.html { redirect_to @student, notice: 'Student was successfully created.' }
@@ -42,7 +36,6 @@ class StudentsController < ApplicationController
     end
   end
 
-  
   def update
     respond_to do |format|
       if @student.update_attributes(student_params)
@@ -51,14 +44,13 @@ class StudentsController < ApplicationController
       else
         format.html do
           @groups = Group.all
-         render :edit 
-       end
+          render :edit
+        end
         format.json { render json: @student.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  
   def destroy
     @student.destroy
     respond_to do |format|
@@ -68,14 +60,12 @@ class StudentsController < ApplicationController
   end
 
   private
-    
-    def set_student
-      @student = Student.find(params[:id])
-    end
 
+  def set_student
+    @student = Student.find(params[:id])
+  end
 
-    
-    def student_params
-      params.require(:student).permit(:name, :surname, :group_id)
-    end
+  def student_params
+    params.require(:student).permit(:name, :surname, :group_id)
+  end
 end

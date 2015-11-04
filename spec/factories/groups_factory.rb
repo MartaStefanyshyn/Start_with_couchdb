@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :group do |f|
+  factory :group do
     title 'Test_group'
   end
 end

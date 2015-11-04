@@ -1,13 +1,12 @@
 require 'couchrest_model'
 class PdfSaver < CouchRest::Model::Base
-	property :title,      String
-    
-    design do 
-      view :by_title
-    end
+  property :title, String
 
-    timestamps!
+  design do
+    view :by_title
+  end
 
-    validates_presence_of :title
+  timestamps!
+
+  validates_presence_of :title
 end
-
