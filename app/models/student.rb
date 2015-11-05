@@ -22,18 +22,16 @@ class Student < CouchRest::Model::Base
     view :by_group_id,
          map: "function(doc){
                if (doc['type'] == 'Student' && doc['group_id'] != null) {
-                   emit(doc.group_id, doc);
-               }
-             }"
-    view :by_group,
-         map: "function(doc){
-               if (doc['type'] == 'Student' && doc['group_id'] != null) {
                    emit(doc.group_id, 1);
                }
              }",
-         reduce: "function(k,v,r){
-               return sum(v);
-           }"
+         reduce: '_sum'
+    view :by_group,
+         map: "function(doc){
+               if (doc['type'] == 'Student' && doc['group_id'] != null) {
+                   emit(doc.group_id, {_id: doc.group_id.title, name: doc.name});
+               }
+             }"
   end
 
   def self.search(search)

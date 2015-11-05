@@ -11,11 +11,14 @@ class Group < CouchRest::Model::Base
   end
 
   def group_students
-    Student.by_group(key: id).all
+    Student.by_group_id(key: self.id).all
   end
 
   def group_students_count
-    Student.by_group(key: id).count
+    students = Student.by_group_id(key: self.id, include_docs: true).reduce.group_level(1).rows
+    students.each do |row|
+      return row.value, row.key
+    end
   end
 
   validates_presence_of :title

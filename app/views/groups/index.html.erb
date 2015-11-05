@@ -18,9 +18,13 @@
   <tbody>
 
     <% @groups.each do |group| %>
+      <% count, id = group.group_students_count %>
+      <% if count == nil %>
+        <% count = 0 %>
+      <% end %>
       <tr>
         <td><%= group.title %></td>
-        <td><%= group.group_students_count%></td>
+        <td><%= count %></td>
         <td><%= link_to 'Show', group %></td>
         <td><%= link_to 'Edit', edit_group_path(group) %></td>
         <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -28,7 +32,6 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
 
 <%= link_to 'New Group', new_group_path %>
