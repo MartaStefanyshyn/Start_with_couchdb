@@ -8,6 +8,11 @@ Rails.application.routes.draw do
     end
   end
   resources :students
-  resources :pdf_savers
+  resources :pdf_savers do
+    member do
+      get :read_pdf
+      get :load_pdf
+    end
+  end
   mount Resque::Server.new, at: '/resque'
 end
