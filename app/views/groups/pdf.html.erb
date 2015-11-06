@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <title>PDF Doc</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <%= wicked_pdf_stylesheet_link_tag 'pdf' %>
+</head>
+<body>
+  <h1>Listing Groups</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Students</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @groups.each do |group| %>
+        <% count, id = group.group_students_count %>
+          <% if count == nil %>
+          <% count = 0 %>
+        <% end %>
+        <tr>
+          <td><%= group.title %></td>
+          <td><%= count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</body>
+</html>

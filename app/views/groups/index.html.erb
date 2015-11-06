@@ -19,7 +19,7 @@
 
     <% @groups.each do |group| %>
       <% count, id = group.group_students_count %>
-      <% if count == nil %>
+      <% if count == nil  %>
         <% count = 0 %>
       <% end %>
       <tr>
@@ -32,8 +32,8 @@
     <% end %>
   </tbody>
 </table>
+
 <br>
 
 <%= link_to 'New Group', new_group_path %>
 <%= link_to 'Create PDF', pdf_generator_groups_path %>
-
