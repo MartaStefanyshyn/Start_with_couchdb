@@ -38,7 +38,7 @@ describe Student, type: :model  do
   it 'group_students_count' do
     group = FactoryGirl.create(:group)
     student = FactoryGirl.create(:student, group_id: group.id)
-    expect(group.group_students_count).to eq(1)
+    expect(group.group_students_count).to eq([1, group.id])
   end
 
   it 'searches right group_by_title' do

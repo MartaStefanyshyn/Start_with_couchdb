@@ -51,7 +51,7 @@ class GroupsController < ApplicationController
   end
 
   def pdf_generator
-    PdfJob.perform_later(html)
+    PdfJob.perform_later()
     flash[:notice] = 'pdf is generating'
     redirect_to groups_path
   end
