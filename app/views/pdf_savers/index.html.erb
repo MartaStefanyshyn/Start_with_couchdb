@@ -1,0 +1,29 @@
+<h1>Listing PDFs</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Attachment</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @pdf_savers.each do |pdf_saver| %>
+      <tr>
+        <td><%= pdf_saver.title %></td>
+        <% pdf_saver.attachments.each do |attach|%>
+        <td><%= pdf_saver.attach %></td>
+
+        <td><%= link_to 'Save', '' %></td>
+        <td><%= link_to 'Edit', '' %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

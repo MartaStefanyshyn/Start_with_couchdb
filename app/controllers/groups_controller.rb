@@ -2,7 +2,8 @@ class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
 
   def index
-    @groups = Group.search(params[:search])
+    @groups_search = Group.search(params[:search])
+    @groups = Group.students_count.reduce.group_level(1).rows
   end
 
   def show
@@ -53,7 +54,7 @@ class GroupsController < ApplicationController
   def pdf_generator
     PdfJob.perform_later()
     flash[:notice] = 'pdf is generating'
-    redirect_to groups_path
+    redirect_to pdf_savers_path
   end
 
   private

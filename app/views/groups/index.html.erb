@@ -18,16 +18,12 @@
   <tbody>
 
     <% @groups.each do |group| %>
-      <% count, id = group.group_students_count %>
-      <% if count == nil  %>
-        <% count = 0 %>
-      <% end %>
       <tr>
-        <td><%= group.title %></td>
-        <td><%= count %></td>
-        <td><%= link_to 'Show', group %></td>
-        <td><%= link_to 'Edit', edit_group_path(group) %></td>
-        <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= group.value[0] %></td>
+        <td><%= group.value[1] %></td>
+        <td><%= link_to 'Show', group_path(group.key) %></td>
+        <td><%= link_to 'Edit', edit_group_path(group.key) %></td>
+        <td><%= link_to 'Destroy', group_path(group.key), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

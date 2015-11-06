@@ -8,17 +8,34 @@ class Group < CouchRest::Model::Base
                    emit(doc.title, doc);
                  }
                }"
+
+    view :students_count,
+         map: "function(doc) {
+                  if (doc['type'] == 'Group') {
+                     emit(doc._id, doc);
+                  }
+                  if (doc['type'] == 'Student') {
+                      emit(doc.group_id, doc);
+                  }
+                }",
+        reduce: "function(keys, values) {
+                    var title;
+                    var count = 0;
+                    for(var i = 0; i < values.length; i++) {
+                      v = values[i];
+                      if (v.type == 'Group') {
+                        title = v.title;
+                      } else {
+                      count++;
+                      }
+                    }
+                    return [title, count];
+                   }"
+
   end
 
   def group_students
     Student.by_group_id(key: self.id).all
-  end
-
-  def group_students_count
-    students = Student.by_group_id(key: self.id, include_docs: true).reduce.group_level(1).rows
-    students.each do |row|
-      return row.value, row.key
-    end
   end
 
   validates_presence_of :title
