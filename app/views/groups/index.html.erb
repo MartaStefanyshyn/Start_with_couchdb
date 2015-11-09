@@ -1,9 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<%= form_tag groups_path, method: 'get' do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search Groups" %>
-  <%= submit_tag "Search", name: nil %>
-<% end %>
+
 
 <h1>Listing Groups</h1>
 <table>
@@ -33,3 +30,4 @@
 
 <%= link_to 'New Group', new_group_path %>
 <%= link_to 'Create PDF', pdf_generator_groups_path %>
+<%= link_to 'Search', search_group_groups_path %>

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :groups do
     collection do
       get :pdf_generator
+      get :search_group
     end
   end
   resources :students

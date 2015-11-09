@@ -2,7 +2,7 @@ class PdfJob < ActiveJob::Base
   queue_as :qpdf
 
   def perform()
-    @groups = Group.all
+    @groups = Group.students_count.reduce.group_level(1).rows
     av = ActionView::Base.new()
     av.view_paths = ActionController::Base.view_paths
 

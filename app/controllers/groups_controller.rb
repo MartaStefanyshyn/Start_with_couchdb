@@ -2,8 +2,11 @@ class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
 
   def index
-    @groups_search = Group.search(params[:search])
     @groups = Group.students_count.reduce.group_level(1).rows
+  end
+
+  def search_group
+    @groups = Group.search(params[:search])
   end
 
   def show
