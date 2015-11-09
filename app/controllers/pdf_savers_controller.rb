@@ -1,29 +1,28 @@
 class PdfSaversController < ApplicationController
+  before_action :create_pdf, only: [:load_pdf, :read_pdf]
   def index
     @pdf_savers = PdfSaver.all
   end
 
   def load_pdf
-    @pdf_saver = PdfSaver.find(params[:id])
-    attachment = @pdf_saver.attachments.first
-    pdf = @pdf_saver.read_attachment(attachment[0])
-    pdf_path = Rails.root.join('public', "#{attachment[0]}.pdf")
-
-    File.open(pdf_path, 'wb') do |file|
-      file << pdf
-    end
-    send_file "public/#{attachment[0]}.pdf", :type=>"application/pdf", :x_sendfile=>true
+    send_file "public/#{@attachment}.pdf", :type=>"application/pdf", :x_sendfile=>true
   end
 
   def read_pdf
+    send_file "public/#{@attachment}.pdf", :type=>"application/pdf", disposition: 'inline'
+  end
+
+  def create_pdf
     @pdf_saver = PdfSaver.find(params[:id])
     attachment = @pdf_saver.attachments.first
-    pdf = @pdf_saver.attachment_url(attachment[0])
-    pdf_path = Rails.root.join('public', "#{attachment[0]}.pdf")
+    pdf = @pdf_saver.read_attachment(attachment[0])
+    @pdf_path = Rails.root.join('public', "#{attachment[0]}.pdf")
 
-    File.open(pdf_path, 'wb') do |file|
+    File.open(@pdf_path, 'wb') do |file|
       file << pdf
     end
-    send_file "public/#{attachment[0]}.pdf", :type=>"application/pdf", disposition: 'inline'
+    @attachment = attachment[0]
   end
 end
+
+
