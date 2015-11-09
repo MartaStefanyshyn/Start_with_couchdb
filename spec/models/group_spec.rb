@@ -1,5 +1,5 @@
 require 'rails_helper'
-describe Student, type: :model  do
+describe Group, type: :model  do
   it 'should create valid group' do
     expect(FactoryGirl.create(:group)).to be_valid
   end
@@ -35,10 +35,10 @@ describe Student, type: :model  do
     expect(group.group_students).to eq([student])
   end
 
-  it 'group_students_count' do
+  it 'map with students_count' do
     group = FactoryGirl.create(:group)
     student = FactoryGirl.create(:student, group_id: group.id)
-    expect(group.group_students_count).to eq([1, group.id])
+    expect(Group.students_count.reduce.group_level(1).values[0]).to eq([group.title, 1])
   end
 
   it 'searches right group_by_title' do

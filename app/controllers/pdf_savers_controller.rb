@@ -12,6 +12,7 @@ class PdfSaversController < ApplicationController
     send_file "public/#{@attachment}.pdf", :type=>"application/pdf", disposition: 'inline'
   end
 
+  private
   def create_pdf
     @pdf_saver = PdfSaver.find(params[:id])
     attachment = @pdf_saver.attachments.first

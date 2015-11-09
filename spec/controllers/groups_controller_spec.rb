@@ -1,11 +1,6 @@
 require 'rails_helper'
 RSpec.describe GroupsController, type: :controller do
   describe 'GET index' do
-    it 'assigns @group' do
-      group = create(:group)
-      get :index
-      expect(assigns(:groups)).to match_array([group])
-    end
     it 'renders the index template' do
       get :index
       expect(response).to render_template('index')
@@ -90,7 +85,7 @@ RSpec.describe GroupsController, type: :controller do
     it 'redirect to index' do
       get :pdf_generator
       PdfJob.perform_later()
-      expect(response).to redirect_to(action: :index)
+      expect(response).to redirect_to("/pdf_savers")
     end
   end
 end
