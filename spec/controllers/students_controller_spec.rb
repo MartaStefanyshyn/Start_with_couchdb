@@ -41,6 +41,14 @@ RSpec.describe StudentsController, type: :controller do
     end
   end
 
+  describe 'GET #edit' do
+    it 'should render edit template' do
+      student = create(:student)
+      get :edit, id: student
+      expect(response).to render_template :edit
+    end
+  end
+
   describe 'POST #create' do
     it 'creates a new student' do
       expect{

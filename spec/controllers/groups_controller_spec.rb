@@ -11,6 +11,14 @@ RSpec.describe GroupsController, type: :controller do
     end
   end
 
+  describe 'GET search_group' do
+    it 'renders the index template' do
+      group = create(:group)
+      get :search_group
+      expect(assigns(:groups)).to match_array([group])
+    end
+  end
+
   describe 'GET #show' do
     it 'assigns the requested group to @group' do
       group = create(:group)
@@ -33,6 +41,14 @@ RSpec.describe GroupsController, type: :controller do
     it 'assigns a new group to @group' do
       get :new
       expect(assigns(:group)).to be_a_new(Group)
+    end
+  end
+
+  describe 'GET #edit' do
+    it 'should render edit template' do
+      group = create(:group)
+      get :edit, id: group
+      expect(response).to render_template :edit
     end
   end
 

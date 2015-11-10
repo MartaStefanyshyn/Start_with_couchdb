@@ -1,7 +1,5 @@
 require 'resque/server'
 Rails.application.routes.draw do
-  get 'pdf_savers/index'
-
   resources :groups do
     collection do
       get :pdf_generator

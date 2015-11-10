@@ -18,8 +18,22 @@ RSpec.describe PdfSaversController, type: :controller do
     end
   end
 
-  # describe "Pdf read and download" do
-  #   it 'sends_file' do
-  #   end
-  # end
+  describe "Pdf read and download" do
+    it 'should allow to read file' do
+      doc = PdfSaver.create(title: 'pdf_output')
+      doc.create_attachment(name: "pdf_file", file: File.open('public/test.pdf'))
+      doc.save!
+      get :read_pdf, id: doc
+      expect(response.headers["Content-Type"]).to eq("application/pdf")
+      expect(response.headers["Content-Disposition"]).to eq("inline; filename=\"pdf_file.pdf\"")
+    end
+    it 'should allow to load file' do
+      doc = PdfSaver.create(title: 'pdf_output')
+      doc.create_attachment(name: "pdf_file", file: File.open('public/test.pdf'))
+      doc.save!
+      get :load_pdf, id: doc
+      expect(response.headers["Content-Type"]).to eq("application/pdf")
+      expect(response.headers["Content-Disposition"]).to eq("attachment; filename=\"pdf_file.pdf\"")
+    end
+  end
 end
