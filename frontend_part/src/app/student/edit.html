@@ -1,0 +1,25 @@
+<div class="container">
+    <h1>Edit Student</h1>
+
+    <form novalidate="novalidate" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="inputName">Title:</label>
+            <div class="controls">
+                <input type="text" id="inputName" ng-model="student.name"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputSurname">Title:</label>
+            <div class="controls">
+                <input type="text" id="inputSurname" ng-model="student.surname"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <a ng-click="back()" class="btn btn-small">Back</a>
+                <a ng-click="updateStudent()" class="btn btn-small btn-primary">Update Student</a>
+            </div>
+        </div>
+    </form>
+</div>

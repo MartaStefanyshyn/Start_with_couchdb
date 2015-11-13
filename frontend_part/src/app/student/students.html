@@ -1,0 +1,15 @@
+<table>
+  <tr>
+    <td><h3>All Students</h3></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr ng-repeat="st in students">
+    <td>{{st.name}}</td>
+    <td>{{st.surname}}</td>
+    <td><a class="btn btn-primary"  ng-click="showStudent(st._id)">Show</a></td>
+    <td><a class="btn btn-primary"  ng-click="editStudent(st._id)">Edit</a></td>
+    <td><a class="btn btn-danger"  ng-click="deleteStudent(st._id)">Delete</a></td>
+  </tr>
+</table>
+<a class="btn btn-success"  ng-click="createStudent()">Create Student</a>
