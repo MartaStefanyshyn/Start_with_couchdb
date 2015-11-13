@@ -5,7 +5,9 @@
     .module('startWithCouchdb')
     .config(routerConfig)
     .factory('Groups', GroupsFactory)
-    .factory('Students', StudentsFactory);
+    .factory('Students', StudentsFactory)
+    .factory('Pdfsavers', PdfsaversFactory);
+
   /** @ngInject */
   function routerConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -46,6 +48,10 @@
         url: "/students_new",
         templateUrl: "app/student/new.html",
         controller: "StudentNewController"
+      }).state("pdf_savers", {
+        url: "/pdf_savers",
+        templateUrl: "app/pdf_saver/pdfsavers.html",
+        controller: "PdfsaversController"
       });
 
     $urlRouterProvider.otherwise('/');
@@ -72,6 +78,11 @@
         'destroy': { method: 'DELETE' }
       });
     return Students;
+  }
+
+  function PdfsaversFactory($resource) {
+    var Pdfsavers = $resource('/api/pdf_savers/:id');
+    return Pdfsavers;
   }
 
 })();
