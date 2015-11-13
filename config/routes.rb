@@ -1,16 +1,18 @@
 require 'resque/server'
 Rails.application.routes.draw do
-  resources :groups do
-    collection do
-      get :pdf_generator
-      get :search_group
+  namespace :api do
+    resources :groups do
+      collection do
+        get :pdf_generator
+        get :search_group
+      end
     end
-  end
-  resources :students
-  resources :pdf_savers do
-    member do
-      get :read_pdf
-      get :load_pdf
+    resources :students
+    resources :pdf_savers do
+      member do
+        get :read_pdf
+        get :load_pdf
+      end
     end
   end
   mount Resque::Server.new, at: '/resque'

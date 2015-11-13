@@ -1,8 +1,9 @@
-class GroupsController < ApplicationController
+class Api::GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
 
   def index
     @groups = Group.students_count.reduce.group_level(1).rows
+    render json: @groups
   end
 
   def search_group
