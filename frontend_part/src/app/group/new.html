@@ -1,0 +1,19 @@
+<div class="container">
+    <h1>New Group</h1>
+
+    <form novalidate="novalidate" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="inputTitle">Title:</label>
+            <div class="controls">
+                <input type="text" id="inputTitle" ng-model="group.title"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <a ng-click="back()" class="btn btn-small">Back</a>
+                <a ng-click="createNewGroup()" class="btn btn-small btn-primary">Create Group</a>
+            </div>
+        </div>
+    </form>
+</div>

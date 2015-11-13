@@ -1,0 +1,15 @@
+<table>
+  <tr>
+    <td><h3>All Groups</h3></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr ng-repeat="gr in groups">
+    <td>{{gr.value[0]}}</td>
+    <td>{{gr.value[1]}}</td>
+    <td><a class="btn btn-primary"  ng-click="showGroup(gr.key)">Show</a></td>
+    <td><a class="btn btn-primary"  ng-click="editGroup(gr.key)">Edit</a></td>
+    <td><a class="btn btn-danger"  ng-click="deleteGroup(gr.key)">Delete</a></td>
+  </tr>
+</table>
+<a class="btn btn-success"  ng-click="createGroup()">Create Group</a>
