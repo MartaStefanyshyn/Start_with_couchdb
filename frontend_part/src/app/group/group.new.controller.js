@@ -11,5 +11,8 @@
         Groups.save($scope.group);
         $location.path('/groups');
       }
+      $scope.back = function () {
+        $location.path('/groups');
+      };
     }
 })();

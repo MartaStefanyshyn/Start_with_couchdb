@@ -7,9 +7,9 @@
 
 
   /** @ngInject */
-    function StudentsController($scope, Students, $location) {
+    function StudentsController($scope, Students, Groups, $location) {
       $scope.students = Students.query();
-
+      $scope.groups = Groups.query();
       $scope.deleteStudent = function (studentId) {
         Students.destroy({ id: studentId });
         $scope.students = Students.query();

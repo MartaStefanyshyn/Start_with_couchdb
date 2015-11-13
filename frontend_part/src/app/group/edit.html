@@ -1,19 +1,17 @@
 <div class="container">
-    <h1>Edit Group</h1>
+  <h1>Edit Group</h1>
 
-    <form novalidate="novalidate" class="form-horizontal">
-        <div class="control-group">
-            <label class="control-label" for="inputTitle">Title:</label>
-            <div class="controls">
-                <input type="text" id="inputTitle" ng-model="group.title"/>
-            </div>
-        </div>
+  <form role="form">
+    <div class="form-group">
+      <label class="control-label" for="inputTitle">Title:</label>
+      <input type="text" id="inputTitle" class="form-control" required="required" placeholder="Group Title" ng-model="group.title"/>
+    </div>
 
-        <div class="control-group">
-            <div class="controls">
-                <a ng-click="back()" class="btn btn-small">Back</a>
-                <a ng-click="updateGroup()" class="btn btn-small btn-primary">Update Group</a>
-            </div>
-        </div>
-    </form>
+    <div class="control-group">
+      <div class="controls">
+        <a ng-click="updateGroup()" class="btn btn-success">Update Group</a>
+        <a ng-click="back()" class="btn btn-default">Back</a>
+      </div>
+    </div>
+  </form>
 </div>

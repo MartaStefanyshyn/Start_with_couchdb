@@ -11,5 +11,8 @@
         Students.save($scope.student);
         $location.path('/students');
       }
+      $scope.back = function () {
+        $location.path('/students');
+      };
     }
 })();
