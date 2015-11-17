@@ -47,8 +47,7 @@ class Api::GroupsController < ApplicationController
 
   def pdf_generator
     PdfJob.perform_later()
-    flash[:notice] = 'pdf is generating'
-    redirect_to pdf_savers_path
+    render json: @groups
   end
 
   private

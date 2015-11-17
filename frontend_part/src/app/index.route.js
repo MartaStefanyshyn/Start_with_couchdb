@@ -68,7 +68,8 @@
         'create':  { method: 'POST' },
         'show':    { method: 'GET', isArray: false, responseType: 'json'  },
         'update':  { method: 'PUT', responseType: 'json',params: {id: '@id'} },
-        'destroy': { method: 'DELETE' }
+        'destroy': { method: 'DELETE' },
+        'backgr_job': {method: 'GET', url: '/api/groups/pdf_generator'}
       });
     return Groups;
   }

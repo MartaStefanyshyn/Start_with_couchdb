@@ -1,7 +1,7 @@
 <div class ="container">
   <h1>Pdf</h1>
   <p><b>Title: </b> {{pdfsaver.title}}</p>
-  <a download="list_of_groups" ng-href = '/app/pdf_saver/{{pdfsaver._id}}.pdf'>Download</a>
-  <a ng-click = "attachment()">Read</a>
+  <a download="list_of_groups" ng-href = '/app/pdf_saver/{{pdfsaver._id}}.pdf' class="btn btn-success">Download</a>
+  <a ng-click = "readAttachment(pdfsaver._id)" class="btn btn-success">Read</a>
   <a ng-click = "back()" class = "btn btn-default">Back</a>
 </div>

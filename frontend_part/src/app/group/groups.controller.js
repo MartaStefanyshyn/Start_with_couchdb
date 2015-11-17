@@ -23,5 +23,8 @@
       $scope.createGroup = function () {
         $location.path('/groups_new');
       };
+      $scope.generatePdf = function () {
+        Groups.backgr_job();
+      };
     }
 })();
