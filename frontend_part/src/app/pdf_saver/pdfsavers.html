@@ -1,14 +1,14 @@
 <div class="container">
   <h3>All Pdf_Savers</h3>
-  <input type="text" ng-model="searchText">
   <table class="table">
     <tr>
       <th>Title</th>
       <th>File</th>
     </tr>
-    <tr ng-repeat="ps in pdfsavers | filter: searchText">
+    <tr ng-repeat="ps in pdfsavers">
       <td>{{ps.title}}</td>
       <td>{{ps._attachments}}</td>
+      <td><a class="btn btn-primary"  ng-click="showPdfsaver(ps._id)">Show</a></td>
     </tr>
   </table>
 </div>

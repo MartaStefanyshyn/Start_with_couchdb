@@ -52,6 +52,10 @@
         url: "/pdf_savers",
         templateUrl: "app/pdf_saver/pdfsavers.html",
         controller: "PdfsaversController"
+      }).state("pdf_saver_read", {
+        url: "/pdf_savers/:id",
+        templateUrl: "app/pdf_saver/pdf_saver.html",
+        controller: "PdfsaverController"
       });
 
     $urlRouterProvider.otherwise('/');
@@ -81,7 +85,10 @@
   }
 
   function PdfsaversFactory($resource) {
-    var Pdfsavers = $resource('/api/pdf_savers/:id');
+    var Pdfsavers = $resource('/api/pdf_savers/:id', {id: '@id'},
+    {
+      'show':    { method: 'GET', isArray: false, responseType: 'json'  },
+    });
     return Pdfsavers;
   }
 
