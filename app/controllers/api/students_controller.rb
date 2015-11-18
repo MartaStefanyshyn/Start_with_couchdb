@@ -3,9 +3,14 @@ class Api::StudentsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @groups = Group.all
+    @groups = Array.new
     @students = Student.search(params[:search])
-    render json: @students
+    @students.each do |student|
+      group = Group.by_id(key: student.group_id).first
+      @groups.push group.title
+    end
+    response = {students: @students, groups: @groups}
+    render json: response
   end
 
   def show

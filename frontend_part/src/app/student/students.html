@@ -8,10 +8,10 @@
       <th>Group</th>
       <th colspan="3"></th>
     </tr>
-    <tr ng-repeat="st in students | filter: searchText">
+    <tr ng-repeat="st in students.students | filter: searchText">
       <td>{{st.name}}</td>
       <td>{{st.surname}}</td>
-      <td>{{st.group_id}}</td>
+      <td>{{students.groups[$index]}}</td>
       <td><a class="btn btn-primary"  ng-click="showStudent(st._id)">Show</a></td>
       <td><a class="btn btn-primary"  ng-click="editStudent(st._id)">Edit</a></td>
       <td><a class="btn btn-danger"  ng-click="deleteStudent(st._id)">Delete</a></td>
