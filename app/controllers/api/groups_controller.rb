@@ -9,6 +9,7 @@ class Api::GroupsController < ApplicationController
 
   def search_group
     @groups = Group.search(params[:search])
+    render json: @groups
   end
 
   def show

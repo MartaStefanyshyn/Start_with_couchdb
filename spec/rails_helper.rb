@@ -16,7 +16,7 @@ SimpleCov.start do
   add_filter '/lib/'
   add_filter '/vendor/'
 
-  add_group 'Controllers', 'app/controllers'
+  add_group 'Controllers', 'app/controllers/api'
   add_group 'Models', 'app/models'
   add_group 'Views', 'app/views/students'
   add_group 'Views', 'app/views/groups'

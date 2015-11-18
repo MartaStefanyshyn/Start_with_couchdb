@@ -12,14 +12,6 @@ class Api::PdfSaversController < ApplicationController
     render json: @pdf_saver
   end
 
-  def load_pdf
-    send_file "public/#{@pdf_saver.id}.pdf", :type=>"application/pdf", :x_sendfile=>true
-  end
-
-  def read_pdf
-    send_file "public/#{@pdf_saver.id}.pdf", :type=>"application/pdf", disposition: 'inline'
-  end
-
   def create_pdf
     @pdf_saver = PdfSaver.find(params[:id])
     attachment = @pdf_saver.attachments.first

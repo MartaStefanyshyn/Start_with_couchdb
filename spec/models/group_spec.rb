@@ -29,12 +29,6 @@ describe Group, type: :model  do
     expect(Group.by_title(key: 'title').all).to match_array([group, group3])
   end
 
-  it 'searches group_students' do
-    group = FactoryGirl.create(:group)
-    student = FactoryGirl.create(:student, group_id: group.id)
-    expect(group.group_students).to eq([student])
-  end
-
   it 'map with students_count' do
     group = FactoryGirl.create(:group)
     student = FactoryGirl.create(:student, group_id: group.id)

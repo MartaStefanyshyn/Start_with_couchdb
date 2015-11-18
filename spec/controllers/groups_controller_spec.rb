@@ -1,10 +1,6 @@
 require 'rails_helper'
-RSpec.describe GroupsController, type: :controller do
+RSpec.describe Api::GroupsController, type: :controller do
   describe 'GET index' do
-    it 'renders the index template' do
-      get :index
-      expect(response).to render_template('index')
-    end
     it 'response with 200 status' do
       get :index
       expect(response).to have_http_status(200)
@@ -20,80 +16,76 @@ RSpec.describe GroupsController, type: :controller do
   end
 
   describe 'GET #show' do
-    it 'assigns the requested group to @group' do
-      group = create(:group)
-      get :show, id: group
-      expect(assigns(:group)).to eq(group)
+    before :each do
+      @group = create(:group)
     end
-    it 'renders the #show view' do
-      group = create(:group)
-      get :show, id: group
-      expect(response).to render_template(:show)
+    it 'render group' do
+      get :show, id: @group, format: :json
+      expect(assigns(:group)).to eq(@group)
+
+      content = response.body
+      expect(content).to include 'title'
+      expect(content).to include '_id'
     end
     it 'respond with success' do
-      group = create(:group)
-      get :show, id: group
+      get :show, id: @group
       expect(response).to be_success
-    end
-  end
-
-  describe 'GET #new' do
-    it 'assigns a new group to @group' do
-      get :new
-      expect(assigns(:group)).to be_a_new(Group)
-    end
-  end
-
-  describe 'GET #edit' do
-    it 'should render edit template' do
-      group = create(:group)
-      get :edit, id: group
-      expect(response).to render_template :edit
     end
   end
 
   describe 'POST #create' do
     it 'creates a new group' do
+      post :create, {group: attributes_for(:group)}, format: :json
+
+      expect(response).to be_success
+
+      content = JSON.parse(response.body)
+      expect(content).to include('title')
+    end
+    it 'creates a new group' do
       expect{
         post :create, group: FactoryGirl.attributes_for(:group)
       }.to change(Group, :count).by(1)
     end
-    it 'does not create the group' do
-      post :create, group: FactoryGirl.attributes_for(:group, title: nil)
-      expect(Group.count).to eq(0)
-    end
-    it 're-renders the new method' do
-      post :create, group: FactoryGirl.attributes_for(:group, title: nil)
-      expect(response).to render_template :new
+    it 'title responds with status unprocessable_entity' do
+      post :create, {group: attributes_for(:group, title: nil)}, format: :json
+      expect(response).to have_http_status(:unprocessable_entity)
     end
   end
 
   describe 'PUT update' do
+    before :each do
+      @group = create(:group)
+    end
     it 'located the requested group' do
-      group = create(:group)
-      put :update, id: group, group: FactoryGirl.attributes_for(:group)
-      expect(assigns(:group)).to eq(group)
+      put :update, id: @group, group: FactoryGirl.attributes_for(:group), format: :json
+
+      expect(response).to be_success
+
+      content = JSON.parse(response.body)
+      expect(content).to include('title')
+      expect(content).to include('_id')
+      expect(content).to include('_rev')
     end
     it 'changes group\'s attributes' do
-      group = create(:group)
-      put :update, id: group,
+      put :update, id: @group,
                    group: FactoryGirl.attributes_for(:group, title: 'aaa')
-      group.reload
-      expect(group.title).to eq('aaa')
+      @group.reload
+      expect(@group.title).to eq('aaa')
     end
-    it 're-renders the edit method' do
-      group = create(:group)
-      put :update, id: group, group: FactoryGirl.attributes_for(:group, title: nil)
-      expect(response).to render_template :edit
+    it 'does not update an group without title' do
+      put :update, { id: @group, group: { title: nil } }, format: :json
+      expect(response).to have_http_status(:unprocessable_entity)
     end
   end
 
   describe 'DELETE destroy' do
-    it 'deletes the category' do
-      group = Group.create(title: 'aaa')
+    it 'deletes group' do
+      group = create(:group)
       expect{
-        delete :destroy, id: group
-      }.to change(Group, :count).by(-1)
+        delete :destroy, id: group, format: :json
+      }.to change(Group,:count).by(-1)
+      expect(response).to have_http_status(:no_content)
     end
   end
 
@@ -101,7 +93,7 @@ RSpec.describe GroupsController, type: :controller do
     it 'redirect to index' do
       get :pdf_generator
       PdfJob.perform_later()
-      expect(response).to redirect_to("/pdf_savers")
+      expect(response).to be_success
     end
   end
 end

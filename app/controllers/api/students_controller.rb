@@ -15,7 +15,6 @@ class Api::StudentsController < ApplicationController
   end
 
   def new
-    @student = Student.new
     @groups = Group.all
   end
 
