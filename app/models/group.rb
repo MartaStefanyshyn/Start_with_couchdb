@@ -31,11 +31,12 @@ class Group < CouchRest::Model::Base
                     }
                     return [title, count];
                    }"
-
-  end
-
-  def group_students
-    Student.by_group_id(key: self.id).all
+      view :by_id,
+           map: "function(doc) {
+                  if (doc['type'] == 'Group') {
+                     emit(doc._id, doc.title);
+                  }
+                }"
   end
 
   validates_presence_of :title

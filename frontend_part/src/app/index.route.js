@@ -66,7 +66,7 @@
     var Groups = $resource('/api/groups/:id', {id: '@id'},
       {
         'create':  { method: 'POST' },
-        'show':    { method: 'GET', isArray: false, responseType: 'json'  },
+        'show':    { method: 'GET'  },
         'update':  { method: 'PUT', responseType: 'json',params: {id: '@id'} },
         'destroy': { method: 'DELETE' },
         'backgr_job': {method: 'GET', url: '/api/groups/pdf_generator'}
@@ -78,7 +78,7 @@
     var Students = $resource('/api/students/:id', {id: '@id'},
       {
         'create':  { method: 'POST' },
-        'show':    { method: 'GET', isArray: false, responseType: 'json'  },
+        'show':    { method: 'GET'  },
         'update':  { method: 'PUT', responseType: 'json',params: {id: '@id'} },
         'destroy': { method: 'DELETE' }
       });

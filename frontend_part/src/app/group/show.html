@@ -1,5 +1,10 @@
 <div class ="container">
   <h1>Group</h1>
-  <p><b>Title: </b> {{group.title}}</p>
+  <p><b>Title: </b> {{group.group.title}}</p>
+  <br/>
+  <h3>Students:</h3>
+  <ul class="list-unstyled" ng-repeat="student in group.group_st">
+      <li>{{student.name}} {{student.surname}}</li>
+  </ul>
   <a ng-click = "back()" class = "btn btn-default">Back</a>
 </div>

@@ -12,8 +12,9 @@ class Api::GroupsController < ApplicationController
   end
 
   def show
-    #@group_students = @group.group_students
-    render json: @group
+    @group_students = Student.by_group_id(key: @group.id).all
+    response = {group: @group, group_st: @group_students}
+    render json: response
   end
 
   def new

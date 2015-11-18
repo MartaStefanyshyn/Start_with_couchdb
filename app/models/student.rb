@@ -29,7 +29,7 @@ class Student < CouchRest::Model::Base
     view :by_group,
          map: "function(doc){
                if (doc['type'] == 'Student' && doc['group_id'] != null) {
-                   emit(doc.group_id, {_id: doc.group_id.title, name: doc.name});
+                   emit(doc.group_id, {_id: doc.group_id, name: doc.name});
                }
              }"
   end
