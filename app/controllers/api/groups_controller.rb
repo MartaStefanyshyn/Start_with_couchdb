@@ -44,6 +44,10 @@ class Api::GroupsController < ApplicationController
 
   def destroy
     @group.destroy
+    @group_students = Student.by_group_id(key: @group.id).all
+    @group_students.each do |student|
+      student.destroy
+    end
     head :no_content
   end
 
