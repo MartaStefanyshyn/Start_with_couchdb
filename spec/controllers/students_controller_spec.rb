@@ -1,11 +1,6 @@
 require 'rails_helper'
 RSpec.describe Api::StudentsController, type: :controller do
   describe 'GET index' do
-    it 'assigns @students' do
-      student = Student.create(name: 'aaa', surname: 'bbbb')
-      get :index
-      expect(assigns(:students)).to match_array([student])
-    end
     it 'response with 200 status' do
       get :index
       expect(response).to have_http_status(200)

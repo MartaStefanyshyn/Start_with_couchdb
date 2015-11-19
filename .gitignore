@@ -20,3 +20,4 @@
 
 /couchdb.stderr
 /couchdb.stdout
+/dump.rdb

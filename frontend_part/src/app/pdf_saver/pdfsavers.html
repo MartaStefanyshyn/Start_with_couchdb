@@ -7,7 +7,7 @@
     </tr>
     <tr ng-repeat="ps in pdfsavers">
       <td>{{ps.title}}</td>
-      <td>{{ps.created_at}}</td>
+      <td>{{ps._attachments}}</td>
       <td><a class="btn btn-primary"  ng-click="showPdfsaver(ps._id)">Show</a></td>
     </tr>
   </table>

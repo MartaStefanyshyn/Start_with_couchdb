@@ -12,6 +12,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'resque'
 gem 'resque-web'
+gem 'resque-status'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '~> 0.9.9.3'
 gem 'activeresource', require: 'active_resource'
