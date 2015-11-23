@@ -1,10 +1,7 @@
-class PdfJob < ActiveJob::Base
+class PdfJob
   include Resque::Plugins::Status
-  queue_as :qpdf
 
   def perform()
-    puts self.status
-    sleep(10)
     @groups = Group.students_count.reduce.group_level(1).rows
     av = ActionView::Base.new()
     av.view_paths = ActionController::Base.view_paths
@@ -22,6 +19,5 @@ class PdfJob < ActiveJob::Base
     doc.create_attachment(name: "pdf_file_#{Time.now}", file: File.open('public/output.pdf'))
     doc.save!
     File.delete(pdf_path) if File.exist?(pdf_path)
-    puts self.status
   end
 end

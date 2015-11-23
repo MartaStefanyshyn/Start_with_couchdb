@@ -24,7 +24,12 @@
         $location.path('/groups_new');
       };
       $scope.generatePdf = function () {
-        Groups.backgr_job();
+        $scope.job = Groups.backgr_job();
+        console.log($scope.job)
+      };
+      $scope.inspectJob = function() {
+         console.log($scope.job._id)
+         $location.path('/jobs/'+$scope.job._id+'/job_status');
       };
     }
 })();

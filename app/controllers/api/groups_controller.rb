@@ -53,10 +53,8 @@ class Api::GroupsController < ApplicationController
 
   def pdf_generator
     job_id = PdfJob.create
-    status = Resque::Plugins::Status::Hash.get(job_id)
-    puts status.status
-    PdfJob.perform(job_id)
-    render json: @groups
+    @job = Job.create!(job_id: job_id, status: "In progres")
+    render json: @job
   end
 
   private

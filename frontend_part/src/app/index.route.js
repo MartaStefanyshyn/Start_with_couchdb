@@ -6,7 +6,8 @@
     .config(routerConfig)
     .factory('Groups', GroupsFactory)
     .factory('Students', StudentsFactory)
-    .factory('Pdfsavers', PdfsaversFactory);
+    .factory('Pdfsavers', PdfsaversFactory)
+    .factory('Jobs', JobsFactory);
 
   /** @ngInject */
   function routerConfig($stateProvider, $urlRouterProvider) {
@@ -56,6 +57,10 @@
         url: "/pdf_savers/:id",
         templateUrl: "app/pdf_saver/pdf_saver.html",
         controller: "PdfsaverController"
+      }).state("job_status", {
+        url: "/jobs/:id/job_status",
+        templateUrl: "app/job/job_status.html",
+        controller: "JobController"
       });
 
     $urlRouterProvider.otherwise('/');
@@ -91,6 +96,11 @@
       'show':    { method: 'GET', isArray: false, responseType: 'json'  },
     });
     return Pdfsavers;
+  }
+
+  function JobsFactory($resource) {
+    var Jobs = $resource('/api/jobs/:id', {id: '@id'});
+    return Jobs;
   }
 
 })();
