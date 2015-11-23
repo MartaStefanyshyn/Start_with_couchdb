@@ -99,7 +99,10 @@
   }
 
   function JobsFactory($resource) {
-    var Jobs = $resource('/api/jobs/:id', {id: '@id'});
+    var Jobs = $resource('/api/jobs/:id', {id: '@id'},
+      {
+        'state':    { method: 'GET', url: '/api/jobs/:id/job_status' },
+      });
     return Jobs;
   }
 
