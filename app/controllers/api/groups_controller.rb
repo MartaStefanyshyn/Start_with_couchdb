@@ -52,9 +52,9 @@ class Api::GroupsController < ApplicationController
   end
 
   def pdf_generator
-    job_id = PdfJob.create
-    @job = Job.create!(job_id: job_id, status: "In progres")
-    render json: @job
+    @job_id = PdfJob.create
+    output = { job_id: @job_id}.to_json
+    render json: { job_id: @job_id}
   end
 
   private

@@ -7,7 +7,7 @@
     .factory('Groups', GroupsFactory)
     .factory('Students', StudentsFactory)
     .factory('Pdfsavers', PdfsaversFactory)
-    .factory('Jobs', JobsFactory);
+    .factory('DataHolder', DataHolder);
 
   /** @ngInject */
   function routerConfig($stateProvider, $urlRouterProvider) {
@@ -98,12 +98,16 @@
     return Pdfsavers;
   }
 
-  function JobsFactory($resource) {
-    var Jobs = $resource('/api/jobs/:id', {id: '@id'},
-      {
-        'state':    { method: 'GET', url: '/api/jobs/:id/job_status' },
-      });
-    return Jobs;
+  function DataHolder($resource) {
+    var value = '';
+    return {
+      setValue: function(newValue) {
+        value = newValue;
+      },
+      getValue: function() {
+        return value;
+      }
+    }
   }
 
 })();

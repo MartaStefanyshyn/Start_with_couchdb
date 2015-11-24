@@ -6,12 +6,12 @@
     .controller('JobController', JobController);
 
   /** @ngInject */
-    function JobController($scope, Jobs, $stateParams, $location) {
-      $scope.job = Jobs.get({id: $stateParams.id});
-      console.log($scope.job);
+    function JobController($scope, DataHolder, $stateParams, $location, $http, $interval) {
+      $scope.job = DataHolder.getValue();
       $scope.checkStatus = function() {
-        $scope.job = Jobs.state({id: $scope.job._id});
-      }
+        $http.get("/api/jobs/"+ $scope.job.job_id + '/job_status')
+        .success(function(response) {$scope.status = response.status;});
+      };
       $scope.back = function () {
         $location.path('/groups');
       };

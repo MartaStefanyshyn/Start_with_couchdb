@@ -7,9 +7,9 @@
 
 
   /** @ngInject */
-    function GroupsController($scope, Groups, $location) {
+    function GroupsController($scope, DataHolder, Groups, $location, $http) {
       $scope.groups = Groups.query();
-
+      $scope.disable = true;
       $scope.deleteGroup = function (groupId) {
         Groups.destroy({ id: groupId });
         $scope.groups = Groups.query();
@@ -24,12 +24,12 @@
         $location.path('/groups_new');
       };
       $scope.generatePdf = function () {
+        $scope.disable = false;
         $scope.job = Groups.backgr_job();
-        console.log($scope.job)
+        DataHolder.setValue($scope.job);
       };
-      $scope.inspectJob = function() {
-         console.log($scope.job._id)
-         $location.path('/jobs/'+$scope.job._id+'/job_status');
+      $scope.inspectJob = function(jobId) {
+        $location.path('/jobs/' + jobId +'/job_status');
       };
     }
 })();

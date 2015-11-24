@@ -14,11 +14,7 @@ Rails.application.routes.draw do
         get :load_pdf
       end
     end
-    resources :jobs do
-      member do
-        get :job_status
-      end
-    end
+    get 'jobs/:id/job_status' => 'jobs#job_status'
     mount Resque::Server.new, at: '/resque'
   end
 end

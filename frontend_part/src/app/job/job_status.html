@@ -1,6 +1,6 @@
-<h1>Hello</h1>
-<a ng-click = "checkStatus()" class = "btn btn-success">Check</a>
-<p>{{job.job_id}}</p>
-<br/>
-<p>{{job.status}}</p>
-
+<div class='container'>
+  <h1>Job Status:</h1><p>{{status}}</p>
+  <p ng-if="job == ''">There is no backgroung job yet</p>
+  <a class="btn btn-success" ng-hide="job == ''" ng-click="checkStatus()">Check Job Status</a>
+  <a class="btn btn-default"  ng-click="back()">Back</a>
+</div>
