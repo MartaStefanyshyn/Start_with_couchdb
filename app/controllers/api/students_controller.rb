@@ -1,6 +1,7 @@
 class Api::StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_authenticity_token
+  before_action :check_authentication, except: [:index, :show]
 
   def index
     @groups = Array.new

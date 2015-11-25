@@ -16,6 +16,7 @@ gem 'resque-status'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '~> 0.9.9.3'
 gem 'activeresource', require: 'active_resource'
+gem 'bcrypt'
 
 group :development, :test do
   gem 'byebug'

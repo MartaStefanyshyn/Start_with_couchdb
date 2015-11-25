@@ -1,7 +1,7 @@
 class Api::PdfSaversController < ApplicationController
   before_action :create_pdf, except: [:index ]
   skip_before_action :verify_authenticity_token
-
+  before_action :check_authentication, except: [:index]
   def index
     @pdf_savers = PdfSaver.all
     render json: @pdf_savers
