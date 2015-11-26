@@ -1,4 +1,6 @@
 class Api::UsersController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def new
     @user = User.new
   end
@@ -7,10 +9,9 @@ class Api::UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.password === @user.password_confirmation
       @user.save
-      redirect_to root_url, :notice => "Signed up!"
+      render json: @user
     else
-      flash[:danger] = "Wrong password"
-      render "new"
+      head :unprocessable_entity
     end
   end
 end

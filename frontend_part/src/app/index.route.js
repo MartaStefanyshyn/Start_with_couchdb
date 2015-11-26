@@ -7,7 +7,8 @@
     .factory('Groups', GroupsFactory)
     .factory('Students', StudentsFactory)
     .factory('Pdfsavers', PdfsaversFactory)
-    .factory('DataHolder', DataHolder);
+    .factory('DataHolder', DataHolder)
+    .factory('Users', UsersFactory);
 
   /** @ngInject */
   function routerConfig($stateProvider, $urlRouterProvider) {
@@ -61,6 +62,22 @@
         url: "/jobs/:id/job_status",
         templateUrl: "app/job/job_status.html",
         controller: "JobController"
+      }).state('login', {
+        url: '/login',
+        templateUrl: 'app/auth/login.html',
+        controller: 'AuthController'
+      }).state('signup', {
+        url: '/signup',
+        templateUrl: 'app/auth/signup.html',
+        controller: 'AuthController'
+      }).state('users', {
+        url: '/users',
+        templateUrl: 'app/auth/users.html',
+        controller: 'UsersController'
+      }).state('logout', {
+        url: '/logout',
+        templateUrl: 'app/auth/logout.html',
+        controller: 'AuthController'
       });
 
     $urlRouterProvider.otherwise('/');
@@ -96,6 +113,16 @@
       'show':    { method: 'GET', isArray: false, responseType: 'json'  },
     });
     return Pdfsavers;
+  }
+
+  function UsersFactory($resource) {
+    var Users = $resource('/api/users/:id', {id: '@id'},
+      {
+        'create':  { method: 'POST' },
+        'login':   { method: 'POST', url: '/api/sessions'},
+        'logout':   { method: 'GET', url: '/api/log_out'}
+      });
+    return Users;
   }
 
   function DataHolder($resource) {
