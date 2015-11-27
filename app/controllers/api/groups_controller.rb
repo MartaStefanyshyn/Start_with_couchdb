@@ -27,19 +27,19 @@ class Api::GroupsController < ApplicationController
   end
 
   def create
-    @group = Group.new(group_params)
+    @group = Group.new(params[:group])
     if @group.save
-      render json: @group
+      render json: @group, status: :created
     else
-      head :unprocessable_entity
+      render json: @group.errors, status: :unprocessable_entity
     end
   end
 
   def update
-    if @group.update_attributes(group_params)
+    if @group.update_attributes(params[:group])
       render json: @group
     else
-      head :unprocessable_entity
+      render json: @group.errors, status: :unprocessable_entity
     end
   end
 
@@ -49,7 +49,7 @@ class Api::GroupsController < ApplicationController
     @group_students.each do |student|
       student.destroy
     end
-    head :no_content
+    render json: @group.errors, status: :no_content
   end
 
   def pdf_generator
@@ -62,9 +62,5 @@ class Api::GroupsController < ApplicationController
 
   def set_group
     @group = Group.find(params[:id])
-  end
-
-  def group_params
-    params.require(:group).permit(:title)
   end
 end
