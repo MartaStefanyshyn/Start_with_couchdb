@@ -1,11 +1,21 @@
 <div class="container">
   <h1>New Group</h1>
 
-  <p>{{response}}</p>
-  <form role="form">
-    <div class="form-group">
-      <label class="control-label" for="inputTitle">Title:</label>
-      <input type="text" id="inputTitle" class="form-control" required="required" placeholder="Group Title" ng-model="group.title"/>
+<!--   <p>{{response}}</p> -->
+  <form name="form">
+    <div class="form-group" ng-class="errorClass('title')">
+      <label class="control-label" for="title">Title:</label>
+      <div class="controls">
+        <input type="text" name="title" class="form-control" required placeholder="Group Title" ng-model="group.title" autofocus/>
+        <span class="help-block" ng-show="form.title.$invalid && form.title.$dirty">
+          {{errorMessage('title')}}
+        </span>
+    </div>
+      <!-- <input type="text" name="title" class="form-control" required placeholder="Group Title" ng-model="group.title" autofocus/> -->
+
+      <!-- <div ng-messages="form.title.$error" style="color:maroon" role="alert">
+        <div ng-message="required">You did not enter a title</div>
+      </div> -->
     </div>
 
     <div class="control-group">
