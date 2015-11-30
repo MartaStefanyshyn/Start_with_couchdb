@@ -16,6 +16,8 @@ class User < CouchRest::Model::Base
                 }"
   end
 
+  validates_presence_of :email, :password, :password_confirmation
+
   def self.authenticate(email, password)
     user = find_by_email(email)
     if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)

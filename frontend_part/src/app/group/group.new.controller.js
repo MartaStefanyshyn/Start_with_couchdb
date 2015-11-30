@@ -6,10 +6,11 @@
     .controller('GroupNewController', GroupNewController);
 
   /** @ngInject */
-    function GroupNewController($scope, Groups, $location, toastr) {
+    function GroupNewController($scope, Groups, $location, toastr, Flash) {
       $scope.createNewGroup = function () {
         function success(response) {
-          $scope.response = response;
+          Flash.create('success', 'Group was successfully created', 'custom-class');
+          $location.path('/groups');
         }
         function failure(response) {
           console.log(response);

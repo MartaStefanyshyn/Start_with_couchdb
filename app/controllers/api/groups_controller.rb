@@ -37,7 +37,7 @@ class Api::GroupsController < ApplicationController
 
   def update
     if @group.update_attributes(params[:group])
-      render json: @group
+      head :no_content
     else
       render json: @group.errors, status: :unprocessable_entity
     end

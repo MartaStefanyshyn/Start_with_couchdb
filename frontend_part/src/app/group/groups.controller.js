@@ -7,11 +7,23 @@
 
 
   /** @ngInject */
-    function GroupsController($scope, DataHolder, Groups, $location, $http) {
+    function GroupsController($scope, DataHolder, Groups, $location, $http, Flash) {
       $scope.groups = Groups.query();
       $scope.disable = true;
       $scope.deleteGroup = function (groupId) {
-        Groups.destroy({ id: groupId });
+        function success(response) {
+          Flash.create('success', 'Group was successfully deleted', 'custom-class');
+          $location.path('/groups');
+        }
+        function failure(response) {
+          angular.forEach(response.data, function(errors, key) {
+            angular.forEach(errors, function(e) {
+              $scope.form[key].$dirty = true;
+              $scope.form[key].$setValidity(e, false);
+            });
+          });
+        }
+        Groups.destroy({ id: groupId }, success, failure);
         $scope.groups = Groups.query();
       };
       $scope.showGroup = function (groupId) {

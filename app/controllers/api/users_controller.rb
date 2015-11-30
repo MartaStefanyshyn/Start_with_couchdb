@@ -8,8 +8,11 @@ class Api::UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.password === @user.password_confirmation
-      @user.save
-      render json: @user
+      if @user.save
+         render json: @user, status: :created
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
     else
       head :unprocessable_entity
     end

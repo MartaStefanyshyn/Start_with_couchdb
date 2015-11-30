@@ -11,7 +11,7 @@ class Api::SessionsController < ApplicationController
     user = User.authenticate(params[:email], params[:password])
     if user
       session[:user_id] = user.id
-      render json: {session: session[:user_id]}
+      render json: {session: session[:user_id], cur_user: current_user}
     else
       head :forbidden
     end
