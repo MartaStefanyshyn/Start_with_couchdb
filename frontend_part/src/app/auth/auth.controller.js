@@ -8,7 +8,7 @@
 
   /** @ngInject */
     function AuthController($scope, Users, $location, $http, Flash, $rootScope) {
-
+      $scope.exist = Users.logged_in();
       $scope.signUp = function(){
         function success(response) {
           Flash.create('success', 'You was successfully signed up. Please log in.', 'custom-class');
@@ -26,14 +26,15 @@
       };
       $scope.logIn = function(){
         function success(response) {
+          console.log($scope.exist);
           Flash.create('success', 'You was successfully loged in.', 'custom-class');
           $location.path('/');
         }
         function failure(response) {
           Flash.create('danger', 'Invalid email or password', 'custom-class');
         }
-
         Users.login($scope.user, success, failure);
+        console.log($scope.exist);
       };
       $scope.logOut = function(){
         function success(response) {

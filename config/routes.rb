@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     end
     resources :sessions
     resources :users
+    get "logged_in" => "users#logged_in", :as => "logged_in"
     get 'jobs/:id/job_status' => 'jobs#job_status'
     mount Resque::Server.new, at: '/resque'
   end

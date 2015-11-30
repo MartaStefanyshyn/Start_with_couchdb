@@ -17,5 +17,15 @@ class Api::UsersController < ApplicationController
       head :unprocessable_entity
     end
   end
+
+  def logged_in
+    @user =  User.by_id(key: session[:user_id]).first if session[:user_id]
+    if @user
+      email = @user.email
+      render json: {email: email}
+    else
+      render json: {email: ''}
+    end
+  end
 end
 

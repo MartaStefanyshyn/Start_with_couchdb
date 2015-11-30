@@ -78,6 +78,10 @@
         url: '/logout',
         templateUrl: 'app/auth/logout.html',
         controller: 'AuthController'
+      }).state('logged_in', {
+        url: '/logged_in',
+        templateUrl: 'app/auth/logout.html',
+        controller: 'AuthController'
       });
 
     $urlRouterProvider.otherwise('/');
@@ -120,7 +124,8 @@
       {
         'create':  { method: 'POST' },
         'login':   { method: 'POST', url: '/api/sessions'},
-        'logout':   { method: 'GET', url: '/api/log_out'}
+        'logout':   { method: 'GET', url: '/api/log_out'},
+        'logged_in': { method: 'GET', url: '/api/logged_in' }
       });
     return Users;
   }

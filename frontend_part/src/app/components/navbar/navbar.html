@@ -8,8 +8,9 @@
         <li><a href="/#/pdf_savers">Pdf_Savers</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#/login">Log In</a></li>
-        <li><a href="#/signup">Sign Up</a></li>
+        <li><a ng-controller="AuthController" ng-show="exist.email == ''" href="#/login">Log In</a></li>
+        <li><a ng-controller="AuthController" ng-hide="exist.email == ''" >Log In As: {{exist.email}}</a></li>
+        <li><a ng-controller="AuthController" ng-show="exist.email == ''" href="#/signup">Sign Up</a></li>
         <li ng-controller="AuthController" ng-click="logOut()"><a href="">Log Out</a></li>
       </ul>
     </div>
